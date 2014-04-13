@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+
+	<head>
+		<meta charset="utf-8">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+                <section>
+                    <h2>Building SPAs with AngularJS</h2>
+                    <h3>Intermediate and advanced topics</h3>
+                    <p>
+                        <small>
+                            <a href="mailto:pkozlowski.opensource@gmail.com">pkozlowski.opensource@gmail.com</a> /
+                            <a href="https://twitter.com/pkozlowski_os">@pkozlowski_os</a>
+                        </small>
+                    </p>
+				</section>
+
+                <section>
+
+    <section>
+        <h2>My name is Pawel Kozlowski</h2>
+
+        <h3>I edit text files for living</h3>
+        <ul>
+            <li><a href="https://github.com/pkozlowski-opensource">https://github.com/pkozlowski-opensource</a></li>
+            <li><a href="mailto:pkozlowski.opensource@gmail.com">pkozlowski.opensource@gmail.com</a></li>
+            <li><a href="https://twitter.com/pkozlowski_os">@pkozlowski_os</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>I'm into climbing and open-source</h2>
+        <img src="https://0.gravatar.com/avatar/73cb0ce891d2be76bd0fdb6e14f4c91c?d=https%3A%2F%2Fidenticons.github.com%2F3e938297ba9793abbd9e22175e44baf5.png&r=x&s=440"
+             alt=""/>
+        <p>AngularJS, angular-app, AngularUI, Karma runner, InteliJ live tpls, MongoLab wrappers...</p>
+    </section>
+
+    <section>
+        <img src="http://www.packtpub.com/sites/default/files/1820OS.jpg" alt=""/>
+    </section>
+
+</section>
+
+                <section>
+                    <h2>Tell us more about yourself</h2>
+                    <ul>
+                        <li>Your name</li>
+                        <li>Your experience with:
+                            <ul>
+                                <li>JavaScript and web development in general</li>
+                                <li>AngularJS</li>
+                                <li>Unit testing and TDD</li>
+                            </ul>
+                        </li>
+                        <li>Web applications where you want to use AngularJS</li>
+                        <li>Your expectations regarding this workshop</li>
+                    </ul>
+                </section>
+
+                <section>
+
+    <section>
+        <h2>Organizational details</h2>
+        <ul>
+            <li>3 days, 09:00 ~ 17:00</li>
+            <li>1h lunch break</li>
+            <li>2 other breaks (15-30 min) during the day</li>
+            <li>Please, switch off your mobile devices (if possible)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Please, do ask questions</h2>
+        <img src="http://ventureburn.com/wp-content/uploads/2013/02/Kids-with-hands-up.jpg" alt=""/>
+        <ul>
+            <li>Short ones at any time</li>
+            <li>A dedicated slot for more involved topics</li>
+            <li>I'm here to address <i>your</i> concerns, not present <i>my</i> material</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Tools and libraries</h2>
+        <ul>
+            <li>Libraries: <ul>
+                <li><a href="http://angularjs.org" target="_blank">AngularJS</a></li>
+                <li><a href="http://jasmine.github.io/">Jasmine</a> - BDD testing framework</li>
+                <li><a href="http://momentjs.com/">moment.js</a> - date / time manipulation helper</li>
+                <li><a href="http://getbootstrap.com/">Bootstrap CSS</a> - so things look decent</li>
+            </ul></li>
+            <li>Tools: <ul>
+                <li><a href="http://www.nodejs.org/" target="_blank">node.js</a> / npm to run build and examples</li>
+                <li><a href="http://gulpjs.com/" target="_blank">Gulp.js</a> as the stream-based build tool</li>
+                <li><a href="http://karma-runner.github.io/0.12/index.html" target="_blank">Karma-runner</a> as a in-browser test runner</li>
+                <li><a href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en" target="_blank">AngularJS Batarang Chrome extension</a></li>
+            </ul></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Exercises and this presentation</h2>
+        <a href="https://github.com/pkozlowski-opensource/js-with-ng-advanced">https://github.com/pkozlowski-opensource/js-with-ng-advanced</a>
+    </section>
+
+    <section>
+        <h2>Working on exercises</h2>
+        <ul>
+            <li>All exercises are in the /exercises folder</li>
+            <li>You usually need to "fill in blanks"</li>
+            <li>A solution is always provided in the "solution" subfolder</li>
+            <li>Useful commands:
+                <ul>
+                    <li><code>gulp www</code> - start built-in web server</li>
+                    <li><code>gulp test</code> - run tests</li>
+                    <li><code>gulp tdd</code> - run tests on each code change</li>
+                </ul>
+            </li>
+            <li>I highly encourage you to pair-program during exercises</li>
+        </ul>
+    </section>
+
+</section>
+                <section>
+
+    <section>
+        <h1>Meet AngularJS</h1>
+        <img src="https://raw.github.com/angular/angular.js/master/images/logo/AngularJS-Shield.exports/AngularJS-Shield-large.png"/>
+    </section>
+
+    <section>
+        <h2>AngularJS framework</h2>
+        <ul>
+            <li>Complete solution for in-browser web applications</li>
+            <li>Created and maintained by Google</li>
+            <li>Open source, many contributors from outside of Google</li>
+            <li>Started over 4 years ago, exploding popularity</li>
+            <li>Revolutionary in several aspects</li>
+            <li>Strong focus on testability</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Be ready to rewrite your brain!</h2>
+        <br/>
+        <blockquote>
+            I hereby declare AngularJS to be MVW framework - Model-View-Whatever. Where Whatever stands for "whatever
+            works
+            for you".
+        </blockquote>
+        <br/>
+
+        <p><i>Igor Minar</i></p>
+    </section>
+
+    <section>
+        <h2>and doubt from time to time...</h2>
+        <img src="http://www.bennadel.com/resources/uploads/2013/feelings_about_angularjs_over_time.png" alt=""/>
+    </section>
+
+    <section>
+        <h2>Hello, {{name}}!</h2>
+        <input type="text" ng-model="name" style="font-size: 36px; width: 80%"/>
+    <pre ng-non-bindable><code>
+&lt;!DOCTYPE html&gt;
+&lt;html ng-app&gt;
+&lt;head&gt;
+    &lt;script src=&quot;/lib/angular.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, {{user.name}}!&lt;/h1&gt;
+    &lt;input type=&quot;text&quot; ng-model=&quot;user.name&quot;/&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    </section>
+
+    <section>
+        <h2>Bits and pieces</h2>
+        <ul>
+            <li><a href="http://www.angularjs.org" target="_blank">www.angularjs.org</a></li>
+            <li><a href="http://code.angularjs.org" target="_blank">code.angularjs.org</a></li>
+        </ul>
+    </section>
+
+</section>
+                <section>
+
+    <section>
+        <h1>AngularJS rendering engine</h1>
+    </section>
+
+    <section>
+        <h2>From static web to... web applications!</h2>
+        <table>
+            <tr>
+                <td><img src="img/old_website.png" alt=""/></td>
+                <td><img src="img/new_website.png" alt=""/></td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>From declarative HTML to...</h2>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 30%">
+<pre><code><span id="greeting">
+    Hello World!
+</span></code></pre>
+                </td>
+                <td style="width: 70%">
+                    <pre><code>var isIE = document.attachEvent;
+
+var addEventListener = isIE  ? function (e, t, fn) {
+  e.attachEvent(&apos;on&apos; + t, fn);
+} : function (e, t, fn) {
+  e.addEventListener(t, fn, false);
+};
+
+addEventListener(document, &apos;load&apos;, function () {
+  var greeting = document.getElementById(&apos;greeting&apos;);
+  if (isIE) {
+    greeting.innerText = &apos;Hello World!&apos;;
+  } else {
+    greeting.textContent = &apos;Hello World!&apos;;
+  }
+});</code></pre>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>We need a superheroic framework!</h2>
+        <img src="http://img.gawkerassets.com/img/18lshnw1rawjgjpg/ku-xlarge.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>But we've got jQuery!</h2>
+        <ul class="list">
+            <li>Remedy for the DOM insanity</li>
+            <li>Focused on DOM querying and manipulation</li>
+            <li>The programming model didn't fundamentally change...</li>
+        </ul>
+<pre><code>
+$(function(){
+  $('#greeting').text('Hello World!');
+});
+</code></pre>
+    </section>
+
+    <section>
+        <h2>We need better abstractions</h2>
+        <blockquote>
+            "Angular is what the web browser would have been, had it been designed for applications"
+        </blockquote>
+        <p><i>Miško Hevery</i></p>
+        <br>
+        <pre><code ng-non-bindable><span>Hello {{name}}!</span></code></pre>
+    </section>
+
+    <section>
+        <h2>Live coding!</h2>
+        <h4>To see some of AngularJS concepts in action.</h4>
+    </section>
+
+    <section>
+        <h2>It is not string-based template!</h2>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 50%">
+                    <h4>String-based templates</h4>
+                    <img src="http://docs.angularjs.org/img/One_Way_Data_Binding.png" alt=""/>
+                </td>
+                <td style="width: 50%">
+                    <h4>AngularJS</h4>
+                    <img src="http://docs.angularjs.org/img/Two_Way_Data_Binding.png" alt=""/>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Rendering engine - takeaways</h2>
+        <ul>
+            <li>Automatic refresh, no need to say "render"</li>
+            <li>Declarative UI driven by model</li>
+            <li>Model is just plain JavaScript</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Make the user-management page live.</p>
+    </section>
+
+</section>
+                <section>
+    <section>
+        <h2>Introduction to JavaScript testing with Jasmine</h2>
+        <img src="http://jasmine.github.io/images/jasmine_vertical.svg"/>
+    </section>
+    <section>
+        <h2>Jasmine</h2>
+        <a href="http://jasmine.github.io/" target="_blank">http://jasmine.github.io/</a>
+        <br><br>
+        <ul>
+            <li>JavaScript testing framework</li>
+            <li>BDD roots visible in its syntax</li>
+            <li>Build-in mocking capabilities</li>
+            <li>Build-in matchers</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Anatomy of a Jasmine test</h3>
+        <pre><code ng-non-bindable>describe(&apos;users controller&apos;, function () {
+
+  var $scope;
+
+  beforeEach(inject(function ($rootScope, $controller) {
+    $scope = $rootScope;
+    $controller(&apos;UsersCtrl&apos;, {
+      &apos;$scope&apos;: $scope
+    });
+  }));
+
+  it(&apos;should initialize scope with an empty users collection&apos;, function () {
+    expect($scope.user).toEqual({});
+    expect($scope.users.length).toEqual(0);
+  });
+
+  it(&apos;should save a current user and update users list&apos;, function () {
+    $scope.user = {name : &apos;foo&apos;};
+
+    $scope.save();
+
+    expect($scope.users.length).toEqual(1);
+    expect($scope.user).toEqual({});
+  });</code></pre>
+        <h4>Let's see some more code...</h4>
+    </section>
+
+    <section>
+        <h2>Testing controllers</h2>
+        <ul>
+            <li>Use <code>$controller</code> service to create instances of controllers</li>
+            <li>Our goal is to test methods on scope set-up be a controller</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Working on code during exercises</h2>
+        <ul>
+            <li>Include only relevant files in the Karma config (inside gulpfile.js)</li>
+            <li><code>gulp test</code> or <code>gulp tdd</code> (recommended)</li>
+            <li>Use <code>ddescribe</code> / <code>iit</code> to execute a subset of tests</li>
+            <li>Put the <code>debugger;</code> statement to debug code</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Finish Jasmine tests for a simple users controller.</p>
+    </section>
+
+</section>
+                <section>
+
+    <section>
+        <h2>Modules and Dependency Injection</h2>
+        <blockquote>
+            "I was expecting a paradigm shift, and all I got was a lousy constructor"
+        </blockquote>
+    </section>
+
+    <section>
+        <h2>A bit of theory</h2>
+        <ul>
+            <li><code>$provide</code> allows us to register recipes for object creation</li>
+            <li>"Recipes" are grouped into modules</li>
+            <li><code>$injector</code> gives access to singletons produced based on those recipes</li>
+            <li>Singleton instances are called "services"</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>We need a module first</h2>
+<pre><code ng-non-bindable>
+    angular.module('app', []);
+</code></pre>
+    </section>
+
+    <section>
+        <h2>DI in AngularJS accepts various recipes</h2>
+        <ul>
+            <li>Values</li>
+            <li>Services</li>
+            <li>Factories</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Values</h2>
+        <pre><code ng-non-bindable>angular.module(&apos;app&apos;, []).value(&apos;userstorage&apos;, new UserStorage());</code></pre>
+    </section>
+
+    <section>
+        <h2>Services</h2>
+        <pre><code ng-non-bindable>angular.module(&apos;app&apos;, []).service(&apos;userstorage&apos;, UserStorage);</code></pre>
+    </section>
+
+    <section>
+        <h2>Factoriess</h2>
+        <pre><code ng-non-bindable>angular.module(&apos;app&apos;, []).service(&apos;factory&apos;, function(){
+    return new UserStorage();
+    // or simply define it here
+  });</code></pre>
+    </section>
+
+    <section>
+        <h2>In reality things are a bit more complex...</h2>
+        <h3>2-phase lifecycle</h3>
+        <ul>
+            <li>Configure</li>
+            <li>Run</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Modules accept various recipes</h2>
+        <ul>
+            <li>Values</li>
+            <li>Services</li>
+            <li>Factories</li>
+            <hr/>
+            <li>Constants</li>
+            <li>Providers</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Constants</h2>
+        <pre><code ng-non-bindable>angular.module(&apos;userstorage&apos;, [])
+  .constant(&apos;SEQUENCE_START&apos;, 1)
+  .factory(&apos;UserStorage&apos;, function(SEQUENCE_START) {
+
+    // I can configure my service based on the constant
+    var sequence = 1;
+
+    // AngularJS services are singletons
+    var UserStorage = {};
+
+    ...
+
+    return UserStorage;
+  });
+
+// I can re-define a constant closer to my application module
+
+angular.module(&apos;app&apos;, [&apos;userstorage&apos;]).constant(&apos;SEQUENCE_START&apos;, 10);</code></pre>
+    </section>
+
+    <section>
+        <h2>Providers</h2>
+        <pre><code ng-non-bindable>angular.module(&apos;userstorage&apos;, [])
+  .provider(&apos;UserStorage&apos;, function() {
+
+    var settings = {
+      seqStart: 1
+    };
+
+    return {
+
+      setSequenceStart: function(seqStart) {
+        settings.seqStart = seqStart;
+      },
+
+      $get: function() {
+        var UserStorage = {};
+        ...
+        return UserStorage;
+      }
+    }
+  });
+
+// I can configure a provider before it gets instantiated
+
+angular.module(&apos;app&apos;, [&apos;userstorage&apos;], function(userstorageProvider) {
+  userstorageProvider.setSequenceStart(10);
+});</code></pre>
+    </section>
+
+    <section>
+        <h2>Modules can depend on other modules</h2>
+<pre><code ng-non-bindable>
+    angular.module('app', ['userManagement', 'commonHelpers'])
+</code></pre>
+    </section>
+
+    <section>
+        <h2>Modules do not _not_ form namespaces!</h2>
+        <pre><code ng-non-bindable>angular.module(&apos;app&apos;, [&apos;foo&apos;, &apos;bar&apos;]);
+
+angular.module(&apos;foo&apos;, []).service(&apos;myService&apos;, FooService);
+angular.module(&apos;bar&apos;, []).service(&apos;myService&apos;, BarService);</code></pre>
+        <h4>But they do prevent pollution of the global JS namespace.</h4>
+    </section>
+
+    <section>
+        <h2>Registering controllers on modules</h2>
+        <pre><code ng-non-bindable></code></pre>
+    </section>
+
+    <section>
+        <h2>DI under the hood</h2>
+        <pre><code ng-non-bindable>angular.module(&apos;users&apos;, [])
+
+  .controller(&apos;UsersCtrl&apos;, function ($scope, UserStorage) {
+</code></pre>
+    </section>
+
+    <section>
+        <h2>AngularJS modules and testing</h2>
+        <pre><code ng-non-bindable> beforeEach(module(&apos;users&apos;));
+ // let&apos;s load real dependencies so those are called if not mocked
+ beforeEach(module(&apos;userstorage&apos;));
+ beforeEach(inject(function (_$rootScope_, _$controller_, _UserStorage_) {
+   $scope = _$rootScope_;
+   // now it should be more obvious why we use underscores
+   $controller = _$controller_;
+   userStorage = _UserStorage_;
+ }));</code></pre>
+    </section>
+
+    <section>
+        <h2>Loading modules on demand</h2>
+        <h3>The bitter truth is that it is not supported...</h3>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Turn code from the previous exercise into its modular equivalent.</p>
+        <p>Check tests to see various mocking / spying techniques.</p>
+        <p>Make the tests pass.</p>
+    </section>
+
+</section>
+                <section>
+    <section>
+        <h2>More on the rendering engine</h2>
+        <h3>Filters</h3>
+        <img src="http://blog.nikonians.org/CPL%20filter.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>Filters</h2>
+<pre><code ng-non-bindable>
+    {{user.birthDate | date:'YYYY-MM-dd'}}
+</code></pre>
+<pre><code ng-non-bindable>
+    {{date(user.birthDate, 'YYYY-MM-dd')}}
+</code></pre>
+        <ul>
+            <li>Global UI formatting / transforming functions</li>
+            <li>Built-in filters: formatting and arrays filtering</li>
+            <li>Very easy to unit-test</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Formatting filters</h2>
+<pre><code ng-non-bindable> &lt;td&gt;{{user.birthDate | date:&apos;yyyy-MM-dd&apos;}}&lt;/td&gt;</code></pre>
+        <h4>Examples of built-in formatting filters:</h4>
+        <ul>
+            <li>currency</li>
+            <li>date</li>
+            <li>json</li>
+            <li>lowercase, uppercase</li>
+            <li>number</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Filtering filters</h2>
+<pre><code ng-non-bindable> &lt;tr ng-repeat=&quot;user in users | filter:filterCriteria | limitTo:20&quot;&gt;
+     &lt;td&gt;{{user.id}}&lt;/td&gt;
+     &lt;td&gt;{{user.login}}&lt;/td&gt;
+     &lt;td&gt;{{user.name}}&lt;/td&gt;</code></pre>
+        <h4>Examples of built-in formatting filters:</h4>
+        <ul>
+            <li>filter</li>
+            <li>limitTo</li>
+            <li>orderBy</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Filters best practices</h2>
+        <ul>
+            <li>UI-focused transforming functions</li>
+            <li>Small, fast, synchronous</li>
+            <li>No side effects</li>
+            <li>Idempotent</li>
+            <li>Model-focused, no DOM manipulation</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Using filters from JavaScript code</h2>
+        <pre><code ng-non-bindable>
+angular.module('myDate', [])
+    .filter('myDate', function (dateFilter, $filter) {
+        return function (inputDate) {
+            return dateFilter(inputDate, 'YYYY-MM-dd');
+            //return $filter('date')(inputDate, 'YYYY-MM-dd');
+         };
+     });
+        </code></pre>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Write a pagination filter, similar to the limitTo one, </p>
+        <p>that allows limiting an array to both boundaries.</p>
+        <p>Write unit tests and code for this filter using TDD.</p>
+        <pre><code ng-non-bindable>{{ users | pagination:pageNo:10}}</code></pre>
+        <a href="https://github.com/angular/angular.js/issues/5355">Issue 5355</a>
+        <p>"limitTo filter should have a left and right bound"</p>
+    </section>
+
+</section>
+                <section>
+
+    <section>
+        <h2>Working with forms</h2>
+        <img src="https://www.vermontjudiciary.org/MasterImage/p-form.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>Form controls available out of the box</h2>
+        <ul>
+            <li>Various types of inputs (text, number, date etc.)</li>
+            <li>Textarea</li>
+            <li>select</li>
+        </ul>
+
+    </section>
+
+    <section>
+        <h2>Validation: ingredients</h2>
+        <ul>
+            <li>We need a form element</li>
+            <li>A form needs a name</li>
+            <li>Each input needs a name as well</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Why do we need all those names?</h2>
+<pre><code ng-non-bindable> &lt;form name=&quot;editform&quot;&gt;
+     &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;id&quot;&gt;Id: &lt;/label&gt;
+         &lt;input type=&quot;text&quot; value=&quot;{{user.id || &apos;A new user&apos;}}&quot; readonly id=&quot;id&quot; class=&quot;form-control&quot;/&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;form-group has-feedback&quot; ng-class=&quot;{&apos;has-success&apos;: editform.login.$valid, &apos;has-error&apos;: editform.login.$invalid}&quot;&gt;
+         &lt;label for=&quot;login&quot;&gt;Login: &lt;/label&gt;
+         &lt;input name=&quot;login&quot; type=&quot;text&quot; ng-model=&quot;user.login&quot; id=&quot;login&quot; class=&quot;form-control&quot; ng-required=&quot;true&quot; ng-minlength=&quot;8&quot;/&gt;
+         &lt;span class=&quot;glyphicon form-control-feedback&quot; ng-class=&quot;{&apos;glyphicon-ok&apos;: editform.login.$valid}&quot;&gt;&lt;/span&gt;
+     &lt;/div&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>Validation states</h2>
+        <ul>
+            <li>$valid / $invalid
+            <li>$error</li>
+            <li>$pristine / $dirty</li>
+        </ul>
+        <br/><br/>
+        <p>Those states are both reflected in JS as well as in HTML</p>
+    </section>
+
+    <section>
+        <h2>$valid / $invalid</h2>
+        <pre><code ng-non-bindable=""><span ng-class="{'glyphicon-ok': editform.login.$valid}"></span></code></pre>
+    </section>
+
+    <section>
+        <h2>$error</h2>
+        <pre><code ng-non-bindable=""><li ng-if="editform.login.$error.required">Login name is required</li>
+<li ng-if="editform.login.$error.minlength">Login name must be at least 8 characters</li></code></pre>
+    </section>
+
+    <section>
+        <h2>$pristine / $dirty</h2>
+        <pre><code ng-non-bindable=""> &lt;div ng-if=&quot;editform.$invalid &amp;&amp; editform.$dirty&quot;&gt;
+     &lt;p&gt;Please correct validation errors:&lt;/p&gt;
+     &lt;ul&gt;
+         &lt;li ng-if=&quot;editform.login.$error.required&quot;&gt;Login name is required&lt;/li&gt;
+         &lt;li ng-if=&quot;editform.login.$error.minlength&quot;&gt;Login name must be at least 8 characters&lt;/li&gt;
+         &lt;li ng-if=&quot;editform.name.$error.required&quot;&gt;User name is required&lt;/li&gt;
+         &lt;li ng-if=&quot;editform.birthdate.$error.required&quot;&gt;Birth date is required&lt;/li&gt;
+     &lt;/ul&gt;
+ &lt;/div&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>ngForm</h2>
+        <h3>HTML doesn't allow us to nest form elements</h3>
+        <ul>
+            <li>Grouping controls for validation</li>
+            <li>Work-around for a "dynamic name" problem</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Known limitations and pitfalls</h2>
+        <ul>
+            <li>"Dynamic names" and validation</li>
+            <li>Autofill doesn't update ngModel</li>
+            <li>"Clashes" with new HTML5 input types (number, date etc.)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Add validation to the edit form.</p>
+        <p>Use any visual feedback for error reporting.</p>
+    </section>
+
+</section>
+                <section>
+
+    <section>
+        <h1>ngAnimate</h1>
+        <img src="http://iscreenparlour.files.wordpress.com/2012/02/cat_run_cycle.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>Animations</h2>
+        <ul>
+            <li>Movement illusion - cheating on the human eye</li>
+            <li>We need to display movement phases frame-by-frame</li>
+            <li>3 main methods of doing "animations" in a browser
+                <ul>
+                    <li>Constructing frames via JavaScript</li>
+                    <li>CSS transitions</li>
+                    <li>CSS animations</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section ng-controller="FadeJSCtrl">
+        <h2>JavaScript animations</h2>
+        <h1 id="fadeJS">Fade me!</h1>
+        <a ng-click="fadeOut()">Out</a> | <a ng-click="fadeIn()">In</a>
+        <pre><code ng-non-bindable> .controller(&apos;FadeJSCtrl&apos;, function ($scope) {
+
+   var elToFade = document.getElementById(&apos;fadeJS&apos;);
+
+   function changeOpacity(opacity, step, stop) {
+     elToFade.style.opacity = opacity;
+     if (!stop(opacity)) {
+       setTimeout(function() {
+         changeOpacity(opacity - step, step, stop);
+       }, 16);
+     }
+   }
+
+   $scope.fadeOut = function () {
+     changeOpacity(1, 0.01, function(newOpacity){
+       return newOpacity &lt;= 0;
+     });
+   };</code></pre>
+    </section>
+
+    <section ng-controller="FadeCssCtrl">
+        <h2>CSS transitions</h2>
+        <h1 class="fade" id="fadeCss">Fade me!</h1>
+        <a ng-click="toggle()">Out</a> | <a ng-click="toggle()">In</a>
+        <pre><code ng-non-bindable> .controller(&apos;FadeCssCtrl&apos;, function ($scope) {
+
+   var elToFade = angular.element(document.getElementById(&apos;fadeCss&apos;));
+
+   $scope.toggle = function () {
+     elToFade.toggleClass(&apos;active&apos;)
+   };
+ })</code></pre>
+        <pre><code ng-non-bindable>.fade {
+    opacity: 1;
+    transition: 1.5s linear all;
+}
+
+.fade.active {
+    opacity: 0;
+}</code></pre>
+    </section>
+
+    <section ng-controller="FadeNgAnimateCtrl">
+        <h2>Back to the declarative World</h2>
+        <h1 class="fade" ng-class="{active: toggleActive}">Fade me!</h1>
+        <a ng-click="toggle()">Out</a> | <a ng-click="toggle()">In</a>
+        <pre><code ng-non-bindable><h1 class="fade" ng-class="{active: toggleActive}">Fade me!</h1></code></pre>
+        <pre><code ng-non-bindable> .controller(&apos;FadeNgAnimateCtrl&apos;, function ($scope) {
+
+   $scope.toggleActive = false;
+
+   $scope.toggle = function () {
+     $scope.toggleActive = !$scope.toggleActive;
+   };
+ })</code></pre>
+        <pre><code ng-non-bindable>.fade {
+    opacity: 1;
+    transition: 1.5s linear all;
+}
+
+.fade.active {
+    opacity: 0;
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Not only ngClass</h2>
+        <ul>
+            <li>We can do <i>some</i> animations using <code>ngClass</code></li>
+            <li>More complex animations require hooks for the DOM element add / remove</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>ngAnimate - declarative animations</h2>
+        <ul>
+            <li>A separate file - <code>angular-animate.js</code></li>
+            <li>A separate module - <code>ngModule</code></li>
+            <li>Supports CSS transitions / animations as well as JS animations</li>
+            <li>All the animations are CSS class-based</li>
+        </ul>
+        <pre><code ng-non-bindable>angular.module('app', ['ngAnimate', 'users', 'userstorage']);</code></pre>
+    </section>
+
+    <section>
+        <h2>ngAnimate and CSS3 transitions</h2>
+        <pre><code ng-non-bindable>&lt;tr ng-repeat="user in users" class="fade"&gt;</code></pre>
+        <pre><code ng-non-bindable="">.fade {
+    box-sizing:border-box;
+}
+
+.fade.ng-enter,
+.fade.ng-leave {
+    transition: all linear 1.5s;
+}
+
+.fade.ng-leave.ng-leave-active,
+.fade.ng-enter {
+    opacity: 0;
+}
+
+.fade.ng-leave,
+.fade.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+</code></pre>
+    </section>
+
+    <section>
+        <h2>Animations can be re-used</h2>
+        <pre><code ng-non-bindable>&lt;div ng-if="showDetails" class="fade"&gt;...&lt;/div&gt;</code></pre>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Add CSS3-transition based animations ot the users' list.</p>
+    </section>
+
+</section>
+
+
+                <section>
+                    <h1>AngularJS rendering internals</h1>
+                    <img src="http://ak3.picdn.net/shutterstock/videos/1374163/preview/stock-footage--d-background-with-endless-complex-clockwork-machinery-loop-depth-of-field.jpg" alt=""/>
+                </section>
+
+                <section>
+                    <h1>That's all!</h1>
+                    <h3>Thank you for having me.</h3>
+                </section>
+
+            </div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+        <script src="lib/js/angular.js"></script>
+        <script src="lib/js/angular-animate.js"></script>
+        <script src="lib/js/ngApp.js"></script>
+
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<section>
+    <section>
+        <h2>Introduction to JavaScript testing with Jasmine</h2>
+        <img src="http://jasmine.github.io/images/jasmine_vertical.svg"/>
+    </section>
+    <section>
+        <h2>Jasmine</h2>
+        <a href="http://jasmine.github.io/" target="_blank">http://jasmine.github.io/</a>
+        <br><br>
+        <ul>
+            <li>JavaScript testing framework</li>
+            <li>BDD roots visible in its syntax</li>
+            <li>Build-in mocking capabilities</li>
+            <li>Build-in matchers</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Anatomy of a Jasmine test</h3>
+        <pre><code ng-non-bindable><%= includeCode('exercises/02_controller_tests/solution/users.spec.js', 'test') %></code></pre>
+        <h4>Let's see some more code...</h4>
+    </section>
+
+    <section>
+        <h2>Testing controllers</h2>
+        <ul>
+            <li>Use <code>$controller</code> service to create instances of controllers</li>
+            <li>Our goal is to test methods on scope set-up be a controller</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Working on code during exercises</h2>
+        <ul>
+            <li>Include only relevant files in the Karma config (inside gulpfile.js)</li>
+            <li><code>gulp test</code> or <code>gulp tdd</code> (recommended)</li>
+            <li>Use <code>ddescribe</code> / <code>iit</code> to execute a subset of tests</li>
+            <li>Put the <code>debugger;</code> statement to debug code</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Finish Jasmine tests for a simple users controller.</p>
+    </section>
+
+</section>

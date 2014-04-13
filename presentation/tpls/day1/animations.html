@@ -1,0 +1,83 @@
+<section>
+
+    <section>
+        <h1>ngAnimate</h1>
+        <img src="http://iscreenparlour.files.wordpress.com/2012/02/cat_run_cycle.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>Animations</h2>
+        <ul>
+            <li>Movement illusion - cheating on the human eye</li>
+            <li>We need to display movement phases frame-by-frame</li>
+            <li>3 main methods of doing "animations" in a browser
+                <ul>
+                    <li>Constructing frames via JavaScript</li>
+                    <li>CSS transitions</li>
+                    <li>CSS animations</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section ng-controller="FadeJSCtrl">
+        <h2>JavaScript animations</h2>
+        <h1 id="fadeJS">Fade me!</h1>
+        <a ng-click="fadeOut()">Out</a> | <a ng-click="fadeIn()">In</a>
+        <pre><code ng-non-bindable><%= includeCode('presentation/lib/js/ngApp.js', 'jsanimations') %></code></pre>
+    </section>
+
+    <section ng-controller="FadeCssCtrl">
+        <h2>CSS transitions</h2>
+        <h1 class="fade" id="fadeCss">Fade me!</h1>
+        <a ng-click="toggle()">Out</a> | <a ng-click="toggle()">In</a>
+        <pre><code ng-non-bindable><%= includeCode('presentation/lib/js/ngApp.js', 'cssanimations') %></code></pre>
+        <pre><code ng-non-bindable><%= includeCode('presentation/css/animate.css') %></code></pre>
+    </section>
+
+    <section ng-controller="FadeNgAnimateCtrl">
+        <h2>Back to the declarative World</h2>
+        <h1 class="fade" ng-class="{active: toggleActive}">Fade me!</h1>
+        <a ng-click="toggle()">Out</a> | <a ng-click="toggle()">In</a>
+        <pre><code ng-non-bindable><h1 class="fade" ng-class="{active: toggleActive}">Fade me!</h1></code></pre>
+        <pre><code ng-non-bindable><%= includeCode('presentation/lib/js/ngApp.js', 'nganimations') %></code></pre>
+        <pre><code ng-non-bindable><%= includeCode('presentation/css/animate.css') %></code></pre>
+    </section>
+
+    <section>
+        <h2>Not only ngClass</h2>
+        <ul>
+            <li>We can do <i>some</i> animations using <code>ngClass</code></li>
+            <li>More complex animations require hooks for the DOM element add / remove</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>ngAnimate - declarative animations</h2>
+        <ul>
+            <li>A separate file - <code>angular-animate.js</code></li>
+            <li>A separate module - <code>ngModule</code></li>
+            <li>Supports CSS transitions / animations as well as JS animations</li>
+            <li>All the animations are CSS class-based</li>
+        </ul>
+        <pre><code ng-non-bindable>angular.module('app', ['ngAnimate', 'users', 'userstorage']);</code></pre>
+    </section>
+
+    <section>
+        <h2>ngAnimate and CSS3 transitions</h2>
+        <pre><code ng-non-bindable>&lt;tr ng-repeat="user in users" class="fade"&gt;</code></pre>
+        <pre><code ng-non-bindable=""><%= includeCode('exercises/06_animations_with_nganimate/solution/animate.css') %></code></pre>
+    </section>
+
+    <section>
+        <h2>Animations can be re-used</h2>
+        <pre><code ng-non-bindable>&lt;div ng-if="showDetails" class="fade"&gt;...&lt;/div&gt;</code></pre>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Add CSS3-transition based animations ot the users' list.</p>
+    </section>
+
+</section>

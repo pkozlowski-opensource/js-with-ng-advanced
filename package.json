@@ -1,0 +1,29 @@
+{
+  "name": "js-with-ng-intro",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pkozlowski-opensource/js-with-ng-intro"
+  },
+  "bugs": {
+    "url": "https://github.com/pkozlowski-opensource/js-with-ng-intro/issues"
+  },
+  "devDependencies": {
+    "gulp": "~3.5.6",
+    "gulp-util": "~2.2.14",
+    "gulp-template": "~0.1.1",
+    "karma": "~0.12.1",
+    "karma-jasmine": "~0.1.5",
+    "karma-chrome-launcher": "~0.1.2",
+    "karma-ng-html2js-preprocessor": "~0.1.0",
+    "string": "~1.8.0",
+    "lodash": "~2.4.1",
+    "gulp-jshint": "~1.5.1",
+    "through2": "~0.4.1"
+  },
+  "dependencies": {
+    "connect": "~2.14.3",
+    "request": "~2.34.0",
+    "send": "~0.2.0"
+  }
+}
