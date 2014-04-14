@@ -13,7 +13,7 @@ js-with-ng-advanced
 ### Running examples
 
 * Type `gulp www` - this will start a built-in WWW server
-* Point your browser to http://localhost:8000 and navigate through examples
+* Point your browser to http://localhost:8005 and navigate through examples
 
 ### Testing
 
