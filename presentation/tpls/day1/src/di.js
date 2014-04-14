@@ -7,7 +7,7 @@ angular.module('app', []).service('userstorage', UserStorage);
 //slide:end:service;
 
 //slide:start:factory;
-angular.module('app', []).service('factory', function(){
+angular.module('app', []).factory('userstorage', function(){
     return new UserStorage();
     // or simply define it here
   });
