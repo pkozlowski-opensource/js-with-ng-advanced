@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <script src="/lib/angular.js"></script>
+    <script src="alert.js"></script>
+    <script type="text/javascript">
+        angular.module('app', ['bs.alert'])
+                .controller('AppCtrl', function ($scope) {
+
+                    $scope.name = 'AngularJS';
+
+                    $scope.alerts = [
+                        { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
+                        { type: 'info', msg: 'Heads up! This alert needs your attention, but it\'s not super important.' },
+                        { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
+                    ];
+
+                    $scope.closeAlert = function (index) {
+                        $scope.alerts.splice(index, 1);
+                    };
+                });
+    </script>
+</head>
+<body ng-controller="AppCtrl">
+
+<div class="container">
+    <pre>
+        Hello, {{name}}!
+    </pre>
+
+    <bs-alert type="{{someVar}}">Hey, this is just a default warning, you can't close me. I can contain <b>markup</b> and even other
+        directive (although bound to a different scope that you might expect).<br>
+        <input type="text" ng-model="name"/>
+    </bs-alert>
+
+    <div ng-repeat="alert in alerts">
+        <bs-alert type="{{alert.type}}" close="closeAlert($index)">
+            {{alert.msg}}
+        </bs-alert>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <script src="/lib/angular.js"></script>
+    <script src="pagination.js"></script>
+    <script>
+        angular.module('app', ['pagination'])
+                .controller('PaginationDemoCtrl', function ($scope) {
+                    $scope.currentPage = 3;
+                    $scope.items = 100;
+                });
+    </script>
+</head>
+<body>
+<div class="container" ng-controller="PaginationDemoCtrl">
+
+    <div class="well">
+        <label for="collectionSize">Collection size: </label>
+        <input type="number" ng-model="items" min="0" class="form-control" id="collectionSize"/>
+
+        <label for="selectedPage">Selected page: </label>
+        <input type="number" ng-model="currentPage" min="0" class="form-control" id="selectedPage"/>
+    </div>
+
+    <bs-pagination selected-page="currentPage" collection-size="items"></bs-pagination>
+</div>
+</body>
+</html>

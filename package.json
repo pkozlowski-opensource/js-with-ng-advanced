@@ -19,7 +19,9 @@
     "string": "~1.8.0",
     "lodash": "~2.4.1",
     "gulp-jshint": "~1.5.1",
-    "through2": "~0.4.1"
+    "through2": "~0.4.1",
+    "gulp-ng-html2js": "~0.1.6",
+    "gulp-concat": "~2.2.0"
   },
   "dependencies": {
     "connect": "~2.14.3",

@@ -348,7 +348,7 @@ $(function(){
     expect($scope.users.length).toEqual(0);
   });
 
-  it(&apos;should save a current user and update users list&apos;, function () {
+  xit(&apos;should save a current user and update users list&apos;, function () {
     $scope.user = {name : &apos;foo&apos;};
 
     $scope.save();
@@ -431,7 +431,7 @@ $(function(){
 
     <section>
         <h2>Factoriess</h2>
-        <pre><code ng-non-bindable>angular.module(&apos;app&apos;, []).service(&apos;factory&apos;, function(){
+        <pre><code ng-non-bindable>angular.module(&apos;app&apos;, []).factory(&apos;userstorage&apos;, function(){
     return new UserStorage();
     // or simply define it here
   });</code></pre>
@@ -535,7 +535,7 @@ angular.module(&apos;bar&apos;, []).service(&apos;myService&apos;, BarService);<
         <h2>DI under the hood</h2>
         <pre><code ng-non-bindable>angular.module(&apos;users&apos;, [])
 
-  .controller(&apos;UsersCtrl&apos;, function ($scope, UserStorage) {
+  .controller(&apos;UsersCtrl&apos;, [&apos;$scope&apos;,&apos;UserStorage&apos;, function ($scope, UserStorage) {
 </code></pre>
     </section>
 
@@ -904,6 +904,662 @@ angular.module('myDate', [])
                     <h1>AngularJS rendering internals</h1>
                     <img src="http://ak3.picdn.net/shutterstock/videos/1374163/preview/stock-footage--d-background-with-endless-complex-clockwork-machinery-loop-depth-of-field.jpg" alt=""/>
                 </section>
+
+                <section>
+
+    <section>
+        <h1>HTML compiler - directives</h1>
+        <img src="http://us.123rf.com/400wm/400/400/timbrk/timbrk1005/timbrk100500049/7066527-html-code-concept.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>Custom DSL on top of HTML</h2>
+        <pre><code ng-non-bindable=""><blink><h2>I'm back</h2></blink></code></pre>
+        <blink><h2>I'm back</h2></blink>
+    </section>
+
+    <section>
+        <h2>Directives' superpowers</h2>
+        <ul>
+            <li>Define your own terminology</li>
+            <li>Avoid HTML code duplication</li>
+            <li>Encapsulate common UI elements (widgets)</li>
+            <li>Work on the higher abstraction level</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Hello, Directive!</h2>
+        <p>Let's go over a minimal directive together, looking into testing techniques as well.</p>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Play with various ways of writing the <code>hello</code> directive and the corresponding tests.</p>
+    </section>
+
+    <section>
+        <h2>DOM-based testing - takeaways</h2>
+        <ul>
+            <li>"Manual" compilation</li>
+            <li>Making use of jQuery for asserts</li>
+            <li>Filling in $templateCache</li>
+            <li>Working with document fragments
+                <ul>
+                    <li>Such tests are "fast"</li>
+                    <li>but certain asserts are impossible (size, focus)</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Directive exercises</h2>
+        <ul>
+            <li>Based on <a href="http://angular-ui.github.io/bootstrap/" target="_blank">angular-ui-bootstrap</a></li>
+            <li>More similar exercises in <a href="https://github.com/pkozlowski-opensource/directives-workshop" target="_blank">Devoxx directives-workshop</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Widgets as mini-applications</h2>
+        <ul>
+            <li>We've got access to the DOM in a directive...</li>
+            <li>... but declarative UI principles still apply!</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="40"></h2>
+        <p>Write a pagination directive and check the corresponding tests</p>
+        <p>Bonus: integrate the pagination directive and the pagination filter</p>
+    </section>
+
+    <section>
+        <h2>Transclusion</h2>
+        <h3>Take it out and put somewhere else</h3>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Write an alert directive and the corresponding tests</p>
+    </section>
+
+    <section>
+        <h2>Inter-directive communication with controllers</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="40"></h2>
+        <p>Write an accordion directive and the corresponding tests</p>
+    </section>
+
+    <section>
+        <h2>Input parsing and formatting</h2>
+        <ul>
+            <li>$formatters: model -> UI</li>
+            <li>$parsers: UI -> model</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Write a datefield directive and check the corresponding tests</p>
+    </section>
+
+</section>
+
+                <section>
+    <section>
+        <h2>Talking to a back-end</h2>
+        <img src="http://www.itrnews.com/images/2012/2012-12-26-Mainframe.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>Restful API with MongoLab</h2>
+        <img src="https://mongolab.com/base/img/mongolab-logo-250x65.png" alt=""/><br>
+        <a target="_blank" href="https://support.mongolab.com/entries/20433053-Is-there-a-REST-API-for-MongoDB-">REST MongoDB API in the cloud</a><br>
+    </section>
+
+    <section>
+        <h2>$http service</h2>
+        <pre><code ng-non-bindable> return $http.get(BASE_URL, {params: {
+   apiKey: API_KEY
+ }}).then(function(response) {
+   return response.data;
+ });</code></pre>
+    </section>
+
+    <section>
+        <h2>$http interactions are fully asynchronous</h2>
+        <img src="http://eightandahalfbit.files.wordpress.com/2013/03/pizzaphone.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>We need better abstractions to work in the asynchronous World</h2>
+        <ul>
+            <ul>
+                <li>When the $http method call ends, results are not ready</li>
+                <li>When an error occurs there is no-one to catch it</li>
+            </ul>
+        </ul>
+    </section>
+
+    <section>
+        <h2>2 ways dealing with asynchronous code</h2>
+        <ul>
+            <li>Callbacks</li>
+            <li>Promises</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Callbacks are not cool</h2>
+        <img src="http://www.qlanguage.com.hk/wp-content/uploads/2013/09/it-stinks-300x300.jpg"><br/>
+        <ul>
+            <li>Chained calls ("callbacks hell")</li>
+            <li>Error handling</li>
+            <li>Parallel calls</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>$http with the promise APi</h2>
+        <h4>Service</h4>
+        <pre><code ng-non-bindable> return $http.get(BASE_URL, {params: {
+   apiKey: API_KEY
+ }}).then(function(response) {
+   return response.data;
+ });</code></pre>
+        <h4>Controller</h4>
+        <pre><code ng-non-bindable> UserStorage.getAll().then(function (users) {
+   $scope.users = users;
+ });</code></pre>
+    </section>
+
+    <section>
+        <h2>$http building blocks</h2>
+        <h4>$http depends on $httpBackend</h4>
+    </section>
+
+    <section>
+        <h2>Testing interactions with $http</h2>
+        <pre><code ng-non-bindable> it(&apos;should support querying users by id&apos;, function () {
+
+   $httpBackend.expectGET(withUrl(&apos;/123&apos;)).respond(testUser);
+
+   userStorage.getById(&apos;123&apos;).then(function(userById) {
+       expect(userById._id.$oid).toEqual(&apos;123&apos;);
+     }, onFail);
+
+   $httpBackend.flush();
+ });</code></pre>
+        <pre><code ng-non-bindable> afterEach(function() {
+   $httpBackend.verifyNoOutstandingExpectation();
+   $httpBackend.verifyNoOutstandingRequest();
+ });</code></pre>
+    </section>
+
+    <section>
+        <h2>2 ways of expressing expectations</h2>
+        <h3>Code oriented vs. back-end oriented</h3>
+        <a href="http://docs.angularjs.org/api/ngMock.$httpBackend" target="_blank">expect vs. when</a>
+        <p>(or application-focused vs. backend-focused)</p>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Change the UserStorage service to work with the MongoLab REST API.</p>
+        <p>Check tests and make them pass.</p>
+    </section>
+
+</section>
+                <section>
+    <section>
+        <h2>Promises with $q</h2>
+        <img src="https://rawgithub.com/promises-aplus/promises-spec/master/logo.svg" width="200px" height="200px"/>
+    </section>
+
+    <section>
+        <h2>Promises</h2>
+        <blockquote>
+            <p>The thing is, promises are not about callback aggregation. That's a simple utility.</p>
+            <p>Promises are about
+                something much deeper, namely providing a direct correspondence between synchronous functions and
+                asynchronous functions.</p>
+        </blockquote>
+        <br/>
+        <i>Domenic Denicola</i> in
+        <a href="http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/">You're Missing the Point of Promises</a>
+    </section>
+
+    <section>
+        <h2>Keeping sanity in the async world</h2>
+        <h4>Results are available in a different call stack...</h4>
+        <ul>
+            <li>"Callbacks hell"</li>
+            <li>There is no one to catch an exception...</li>
+            <li>Calling functions in a loop etc.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Promises in AngularJS</h2>
+        <p>The $q service based on Kris Kowal's q library</p>
+        <a href="https://github.com/kriskowal/q">https://github.com/kriskowal/q</a>
+    </section>
+
+    <section>
+        <h2>Let's see some code</h2>
+        <pre><code ng-non-bindable> var Person = function (name, $log) {
+
+   this.eat = function (food) {
+     $log.info(name + &quot; is eating delicious &quot; + food);
+   };
+   this.beHungry = function (reason) {
+     $log.warn(name + &quot; is hungry because: &quot; + reason);
+   };
+ };</code></pre>
+    </section>
+
+    <section>
+        <h2>Basic usage scenario</h2>
+        <pre><code ng-non-bindable> it(&apos;should illustrate basic usage of $q&apos;, function () {
+
+   //deferred represents a task that will complete (or fail) in the future
+   var pizzaOrderFulfillment = $q.defer();
+
+   //the task in the future comes with a promise of task completion (or failure)
+   var pizzaDelivered = pizzaOrderFulfillment.promise;
+
+   pizzaDelivered.then(pawel.eat, pawel.beHungry);
+
+   pizzaOrderFulfillment.resolve(&apos;Margherita&apos;);
+   $rootScope.$digest();
+
+   expect($log.info.logs).toContain([&apos;Pawel is eating delicious Margherita&apos;]);
+ });</code></pre>
+    </section>
+
+    <section>
+        <h2>There are always 2 actors</h2>
+        <ul>
+            <li>I control the future (.resolve, .reject)</li>
+            <li>I depend on future results (.then)</li>
+        </ul>
+        <pre><code ng-non-bindable> it(&apos;should illustrate promise resolution in a service&apos;, function () {
+
+   var pizzaDelivered = pizzaPit.takeOrder(&apos;Margherita&apos;);
+   pizzaDelivered.then(pawel.eat, pawel.beHungry);
+
+   pizzaPit.deliverOrder();
+
+   expect($log.info.logs).toContain([&apos;Pawel is eating delicious Margherita&apos;]);
+ });</code></pre>
+        <pre><code ng-non-bindable> try {
+   pawel.eat(pizzaPit.takeOrder(&apos;Margherita&apos;));
+ } catch (e) {
+   pawel.beHungry(e.msg);
+ }</code></pre>
+    </section>
+
+    <section>
+        <h2>Callback aggregation</h2>
+        <pre><code ng-non-bindable> it(&apos;should allow callbacks aggregation&apos;, function () {
+   var pizzaDelivered = pizzaPit.takeOrder(&apos;Margherita&apos;);
+   pizzaDelivered.then(pawel.eat, pawel.beHungry);
+   pizzaDelivered.then(pete.eat, pete.beHungry);
+
+   pizzaPit.deliverOrder();
+   expect($log.info.logs).toContain([&apos;Pawel is eating delicious Margherita&apos;]);
+   expect($log.info.logs).toContain([&apos;Peter is eating delicious Margherita&apos;]);
+ });</code></pre>
+        <pre><code ng-non-bindable> try {
+   var pizza = pizzaPit.takeOrder(&apos;Margherita&apos;);
+   pawel.eat(pizza);
+   pete.eat(pizza);
+ } catch (e) {
+   pawel.beHungry(e.msg);
+   pete.beHungry(e.msg);
+ }</code></pre>
+    </section>
+
+    <section>
+        <h2>Promise chaining</h2>
+        <pre><code ng-non-bindable> it(&apos;should illustrate successful promise chaining&apos;, function () {
+
+   var slice = function(pizza) {
+     return &quot;sliced &quot;+pizza;
+   };
+
+   pizzaPit
+     .takeOrder(&apos;Margherita&apos;)
+     .then(slice)
+     .then(pawel.eat, pawel.beHungry);
+
+   pizzaPit.deliverOrder();
+   expect($log.info.logs).toContain([&apos;Pawel is eating delicious sliced Margherita&apos;]);
+ });</code></pre>
+        <pre><code ng-non-bindable> try {
+   pawel.eat(slice(pizzaPit.takeOrder(&apos;Margherita&apos;)));
+ } catch (e) {
+   pawel.beHungry(e.msg);
+ }</code></pre>
+    </section>
+
+    <section>
+        <h2>Error recovery</h2>
+        <pre><code ng-non-bindable> it(&apos;should illustrate recovery from promise rejection&apos;, function () {
+
+   var retry = function(reason) {
+     return pizzaPit.takeOrder(&apos;Margherita&apos;).then(slice);
+   };
+   pizzaPit.takeOrder(&apos;Capricciosa&apos;).then(slice, retry).then(pawel.eat, pawel.beHungry);
+
+   pizzaPit.problemWithOrder(&apos;no Capricciosa, only Margherita left&apos;);
+   pizzaPit.deliverOrder();
+
+   expect($log.info.logs).toContain([&apos;Pawel is eating delicious sliced Margherita&apos;]);
+ });</code></pre>
+        <pre><code ng-non-bindable> try {
+   pawel.eat(pizzaPit.takeOrder(&apos;Capricciosa&apos;));
+ } catch (e) {
+   pawel.eat(pizzaPit.takeOrder(&apos;Margherita&apos;));
+ }</code></pre>
+    </section>
+
+    <section>
+        <h2>Explicit rejection</h2>
+        <pre><code ng-non-bindable> it(&apos;should illustrate explicit rejection in chain&apos;, function () {
+
+   var explain = function(reason) {
+     return $q.reject(&apos;ordered pizza not available&apos;);
+   };
+
+   pizzaPit.takeOrder(&apos;Capricciosa&apos;).then(slice, explain).then(pawel.eat, pawel.beHungry);
+   pizzaPit.problemWithOrder(&apos;no Capricciosa, only Margherita left&apos;);
+
+   expect($log.warn.logs).toContain([&apos;Pawel is hungry because: ordered pizza not available&apos;]);
+ });</code></pre>
+        <pre><code ng-non-bindable> try {
+   pawel.eat(pizzaPit.takeOrder(&apos;Capricciosa&apos;));
+ } catch (e) {
+   throw new Exception(&apos;ordered pizza not available&apos;);
+ }</code></pre>
+    </section>
+
+    <section>
+        <h2>More on $q</h2>
+        <ul>
+            <li>$q.when(value) - wraps JavaScript value as a promise</li>
+            <li>$q.reject(reason) - wraps JavaScript value as a rejected promise</li>
+            <li>$q.all(promise1, promise2) - "parallel calls"</li>
+        </ul>
+    </section>
+
+</section>
+
+                <section>
+
+    <section>
+        <h2>Working with RESTful endpoints</h2>
+
+        <h3>or DRY-ing $http interactions</h3>
+        <img src="http://petewarden.files.wordpress.com/2008/04/987da-rascallyrepeatingrabbits.png" alt=""/>
+    </section>
+
+    <section>
+        <h2>Code interacting with RESTful APIs gets very repetitive</h2>
+        <ul>
+            <li>Similar URLs</li>
+            <li>A fixed set of actions and HTTP verbs</li>
+            <li>Similar data serializing / parsing</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>AngularJS has 2 solutions</h2>
+        <ul>
+            <li>ngResource</li>
+            <li>custom abstraction over $http</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>ngResource</h1>
+    </section>
+
+    <section>
+        <h2>ngResource philosophy</h2>
+        <ul>
+            <li>Generic - aims to work with <i>any</i> REST backend</li>
+            <li>Opinionated:
+                <ul>
+                    <li>all the URLs need to follow a certain pattern</li>
+                    <li>CRUD operation names and their mapping to HTTP verbs</li>
+                    <li>pre-defined response format</li>
+                </ul>
+            </li>
+            <li>Table Data Gateway and Active Record patterns</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Show me the code!</h2>
+        <pre><code ng-non-bindable=""> var User = $resource(&apos;https://api.mongolab.com/api/1/databases/&apos; + MONGOLAB_CONFIG.DB_NAME + &apos;/collections/users/:id&apos;,
+   {
+     apiKey: MONGOLAB_CONFIG.API_KEY,
+     id: &apos;@_id.$oid&apos;
+   }, {
+     update: {
+       method: &apos;PUT&apos;,
+       transformRequest: function (data) {
+         return JSON.stringify(angular.extend({}, data, {_id: undefined}));
+       }
+     }
+   });</code></pre>
+        <h4>More generally:</h4>
+<pre><code ng-non-bindable="">
+    ResourceClass = $resource('http://some/urls/with/:param1?other=:param2',
+        { param1: '@id', param2: 'some fixed value'},
+        { // custom actions go here});
+</code></pre>
+    </section>
+
+    <section>
+        <h2>$resource returns a constructor</h2>
+        <pre><code ng-non-bindable="">
+            var User = $resource('http://...', {...}, {...});
+
+            //get all users
+            User.query({}, function(users){
+                //do something with users here...
+            });
+
+            //create and save a user
+            var user = new User({name: 'Peter'});
+            user.$save();
+
+
+            //later on we can delete it
+            user.$remove();
+        </code></pre>
+    </section>
+
+
+    <section>
+        <h2>Methods generated in a new resource "class"</h2>
+        <ul>
+            <li>"Class" methods:
+                <ul>
+                    <li><code>User.get</code> (GET, object)</li>
+                    <li><code>User.query</code> (GET, array)</li>
+                    <li><code>User.save</code> (POST, object)</li>
+                    <li><code>User.remove</code> (DELETE, object)</li>
+                </ul>
+            </li>
+            <li>"Instance" methods:
+                <ul>
+                    <li><code>user.$save</code> (POST, object)</li>
+                    <li><code>user.$remove</code> (DELETE, object)</li>
+                </ul>
+            </li>
+            <li>There is no default <code>update</code> method!</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Usage scenarios - instance methods</h2>
+        <pre><code ng-non-bindable=""> $scope.remove = function (user) {
+
+   console.log(user.$remove());
+ };</code></pre>
+    </section>
+
+    <section>
+        <h2>Usage scenarios - class methods</h2>
+<pre><code ng-non-bindable="">
+    function refreshUsersList() {
+        $scope.users = User.query({});
+        console.log($scope.users[0]);
+    }
+</code></pre>
+        <h3>Is it synchronous??? Nope...</h3>
+<pre><code ng-non-bindable="">
+    function refreshUsersList() {
+        User.query({}, function(users) {
+            $scope.users = users;
+            console.log($scope.users[0]);
+        });
+    }
+</code></pre>
+    </section>
+
+</section>
+                <section>
+
+    <section>
+        <h2>Building your own persistence layer</h2>
+        <img src="http://abeautifulmess.typepad.com/.a/6a00d8358081ff69e20163007ca50d970d-800wi" alt=""/>
+    </section>
+
+    <section>
+        <h2>Potential problems with $resource</h2>
+        <ul>
+            <li>Limited control over URLs and HTTP verbs</li>
+            <li>Pre-defined response formats (especially for collections)</li>
+            <li>Promise support added as an afterthought</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Custom ngResource-like factory</h2>
+        <h3>It is (rather) easy to create a custom, $resource-like wrapper</h3>
+        <ul>
+            <li>Address $resource limitations</li>
+            <li>First-class promises support</li>
+            <li>Custom actions / methods</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>The ideal solution</h2>
+        <h4>Storage service</h4>
+        <pre><code ng-non-bindable="">angular.module(&apos;userstorageHttpResource&apos;, [&apos;mongolab&apos;])
+  .factory(&apos;User&apos;, function ($mongolabResource) {
+    return $mongolabResource(&apos;users&apos;);
+  });</code></pre>
+        <h4>Controller</h4>
+        <pre><code ng-non-bindable=""> function refreshUsersList() {
+   User.getAll().then(function (users) {
+     $scope.users = users;
+   });
+ }</code></pre>
+        <pre><code ng-non-bindable=""> $scope.save = function () {
+   $scope.user.$save().then(function () {
+     $scope.cleanUser = new User({});
+     $scope.clear();
+     refreshUsersList();
+   });
+ };</code></pre>
+    </section>
+
+    <section>
+        <h2>Let's go over the implementation code together</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Inspect code of the custom MongoLab resource.</p>
+        <p>Use it from a controller.</p>
+    </section>
+
+</section>
+                <section>
+
+    <section>
+        <h2>$http interceptors</h2>
+    </section>
+
+    <section>
+        <h2>2 APIs for $http interceptors</h2>
+        <ul>
+            <li>"response interceptors" - DEPRECATED</li>
+            <li>"new" around interceptors</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Simple example - $http requests tracker</h2>
+        <pre><code ng-non-bindable> .factory(&apos;progressInterceptor&apos;, function ($q, $rootScope) {
+
+   var pendingRequestsCount = 0;
+
+   return {
+     request : function(config) {
+       pendingRequestsCount++;
+       $rootScope.httpInProgress = pendingRequestsCount &gt; 0;
+       return config;
+     },
+     requestError : function(rejectionReason) {
+       //do nothing - if a request failed we don&apos;t need to show any progress bar
+       return $q.reject(rejectionReason);
+     },
+     response : function (response) {
+       pendingRequestsCount--;
+       $rootScope.httpInProgress = pendingRequestsCount &gt; 0;
+       return response;
+     },
+     responseError : function(rejectionReason) {
+       pendingRequestsCount--;
+       $rootScope.httpInProgress = pendingRequestsCount &gt; 0;
+       return $q.reject(rejectionReason);
+     }
+   };
+ })</code></pre>
+    </section>
+
+    <section>
+        <h2>Registering interceptors</h2>
+        <pre><code ng-non-bindable> .config(function($httpProvider){
+   $httpProvider.interceptors.push(&apos;progressInterceptor&apos;);
+ });</code></pre>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Write an interceptor that can be used to track $http .</p>
+    </section>
+
+</section>
 
                 <section>
                     <h1>That's all!</h1>

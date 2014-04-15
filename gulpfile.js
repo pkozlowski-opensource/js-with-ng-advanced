@@ -3,6 +3,8 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var template = require('gulp-template');
 var jshint = require('gulp-jshint');
+var concat = require('gulp-concat');
+var ngHtml2Js = require("gulp-ng-html2js");
 var lodash = require('lodash');
 
 //unit testing with karma dependency
@@ -26,6 +28,7 @@ var karmaDefaultConf = {
     'exercises/lib/moment.js',
     'exercises/lib/angular.js',
     'exercises/lib/angular-mocks.js',
+    'exercises/lib/jasmine-matchers.js',
     'exercises/**/solution/*.js',
     'exercises/**/solution/*.tpl.html'
   ],
@@ -72,4 +75,14 @@ gulp.task('www', function () {
 
   gutil.log('Starting WWW server at http://localhost:' + port);
   http.createServer(app).listen(port);
+});
+
+gulp.task('ngtpls', function () {
+  gulp.src('exercises/**/solution/*.tpl.html')
+    .pipe(ngHtml2Js({
+      moduleName: 'templates',
+      rename: path.basename
+    }))
+    .pipe(concat('templates.js'))
+    .pipe(gulp.dest('./complete'));
 });

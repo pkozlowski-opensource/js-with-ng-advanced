@@ -1,0 +1,108 @@
+<section>
+
+    <section>
+        <h1>HTML compiler - directives</h1>
+        <img src="http://us.123rf.com/400wm/400/400/timbrk/timbrk1005/timbrk100500049/7066527-html-code-concept.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>Custom DSL on top of HTML</h2>
+        <pre><code ng-non-bindable=""><blink><h2>I'm back</h2></blink></code></pre>
+        <blink><h2>I'm back</h2></blink>
+    </section>
+
+    <section>
+        <h2>Directives' superpowers</h2>
+        <ul>
+            <li>Define your own terminology</li>
+            <li>Avoid HTML code duplication</li>
+            <li>Encapsulate common UI elements (widgets)</li>
+            <li>Work on the higher abstraction level</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Hello, Directive!</h2>
+        <p>Let's go over a minimal directive together, looking into testing techniques as well.</p>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Play with various ways of writing the <code>hello</code> directive and the corresponding tests.</p>
+    </section>
+
+    <section>
+        <h2>DOM-based testing - takeaways</h2>
+        <ul>
+            <li>"Manual" compilation</li>
+            <li>Making use of jQuery for asserts</li>
+            <li>Filling in $templateCache</li>
+            <li>Working with document fragments
+                <ul>
+                    <li>Such tests are "fast"</li>
+                    <li>but certain asserts are impossible (size, focus)</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Directive exercises</h2>
+        <ul>
+            <li>Based on <a href="http://angular-ui.github.io/bootstrap/" target="_blank">angular-ui-bootstrap</a></li>
+            <li>More similar exercises in <a href="https://github.com/pkozlowski-opensource/directives-workshop" target="_blank">Devoxx directives-workshop</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Widgets as mini-applications</h2>
+        <ul>
+            <li>We've got access to the DOM in a directive...</li>
+            <li>... but declarative UI principles still apply!</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="40"></h2>
+        <p>Write a pagination directive and check the corresponding tests</p>
+        <p>Bonus: integrate the pagination directive and the pagination filter</p>
+    </section>
+
+    <section>
+        <h2>Transclusion</h2>
+        <h3>Take it out and put somewhere else</h3>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Write an alert directive and the corresponding tests</p>
+    </section>
+
+    <section>
+        <h2>Inter-directive communication with controllers</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="40"></h2>
+        <p>Write an accordion directive and the corresponding tests</p>
+    </section>
+
+    <section>
+        <h2>Input parsing and formatting</h2>
+        <ul>
+            <li>$formatters: model -> UI</li>
+            <li>$parsers: UI -> model</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Write a datefield directive and check the corresponding tests</p>
+    </section>
+
+</section>
