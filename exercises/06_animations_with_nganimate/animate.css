@@ -2,8 +2,3 @@
     box-sizing:border-box;
 }
 
-.fade.ng-enter,
-.fade.ng-leave {
-    transition: all linear 1.5s;
-}
-

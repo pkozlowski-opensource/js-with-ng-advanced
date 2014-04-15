@@ -10,7 +10,6 @@ angular.module('userstorage', [])
     // AngularJS services are singletons
     var UserStorage = {};
 
-    // ex:start
     UserStorage.save = function (user) {
       if (!user.id) {
         user.id = sequence++;
@@ -43,6 +42,5 @@ angular.module('userstorage', [])
       return result;
     };
 
-    //ex:end
     return UserStorage;
   });

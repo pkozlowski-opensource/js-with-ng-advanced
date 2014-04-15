@@ -43,15 +43,21 @@
     </form>
 </div>
 
+<div ng-init="fade=true" ng-click="fade = !fade">
+    <h1 ng-if="fade" class="fademe">Fade me</h1>
+</div>
+
 <table class="table table-bordered">
     <tr>
         <th>Id</th>
-        <th>Login</th>
+        <div ng-if="hasLogin()">
+            <th>Login</th>
+        </div>
         <th>Name</th>
         <th>Date of birth</th>
         <th>Tools</th>
     </tr>
-    <tr ng-repeat="user in users" class="fade">
+    <tr ng-repeat="user in users" class="fademe">
         <td>{{user.id}}</td>
         <td>{{user.login}}</td>
         <td>{{user.name}}</td>

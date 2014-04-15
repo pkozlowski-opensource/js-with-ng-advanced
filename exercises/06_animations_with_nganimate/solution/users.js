@@ -1,11 +1,7 @@
-//slide:start:ctrl;
 angular.module('users', [])
 
-  //slide:start:di;
   .controller('UsersCtrl', function ($scope, UserStorage) {
 
-    //slide:end:di;
-    // ex:start
     $scope.cleanUser = {};
     $scope.users = UserStorage.getAll();
 
@@ -16,8 +12,6 @@ angular.module('users', [])
       $scope.users = UserStorage.getAll();
     };
 
-    //slide:end
-
     $scope.remove = function (userId) {
       UserStorage.remove(userId);
       $scope.users = UserStorage.getAll();
@@ -27,7 +21,6 @@ angular.module('users', [])
       $scope.cleanUser = angular.copy(user);
       $scope.clear();
     };
-    //ex:end
 
     $scope.hasEdits = function () {
       return !angular.equals($scope.user, $scope.cleanUser);
