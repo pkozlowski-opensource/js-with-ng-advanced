@@ -348,7 +348,7 @@ $(function(){
     expect($scope.users.length).toEqual(0);
   });
 
-  xit(&apos;should save a current user and update users list&apos;, function () {
+  it(&apos;should save a current user and update users list&apos;, function () {
     $scope.user = {name : &apos;foo&apos;};
 
     $scope.save();
@@ -865,22 +865,52 @@ angular.module('myDate', [])
     <section>
         <h2>ngAnimate and CSS3 transitions</h2>
         <pre><code ng-non-bindable>&lt;tr ng-repeat="user in users" class="fade"&gt;</code></pre>
-        <pre><code ng-non-bindable="">.fade {
-    box-sizing:border-box;
+        <pre><code ng-non-bindable="">.fademe {
 }
 
-.fade.ng-enter,
-.fade.ng-leave {
+.fademe.ng-enter {
     transition: all linear 1.5s;
-}
-
-.fade.ng-leave.ng-leave-active,
-.fade.ng-enter {
     opacity: 0;
 }
 
-.fade.ng-leave,
-.fade.ng-enter.ng-enter-active {
+.fademe.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.fademe.ng-leave {
+    transition: all linear 1.5s;
+}
+
+.fademe.ng-leave.ng-leave-active,
+.fademe.ng-enter {
+    opacity: 0;
+}
+
+.fademe.ng-leave,
+.fademe.ng-enter.ng-enter-active {
     opacity: 1;
 }
 </code></pre>
@@ -1562,8 +1592,346 @@ angular.module('myDate', [])
 </section>
 
                 <section>
+
+    <section>
+        <h1>URLs and navigation</h1>
+        <img src="http://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2013/10/URL.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>It all started good...</h2>
+        <h2>with a URL pointing to _one_ resource on a server...</h2>
+        <a>http://www.hotnews.com/sport/football.html</a>
+    </section>
+
+    <section>
+        <h2>Dynamic sites have broken URL model...</h2>
+        <h3>and back / forward buttons...</h3>
+        <h4>and refresh...</h4>
+        <a>http://www.hotnews.com/sport.asp?category=football</a>
+    </section>
+
+    <section>
+        <h2>AJAX made the situation only worse...</h2>
+        <h3>or have broken things differently...</h3>
+        <a>http://www.hotnews.com/sport.html#football</a>
+    </section>
+
+    <section>
+        <h2>Basic problem:</h2>
+        <h3>there is _one_ URL to denote current _state_ of an application</h3>
+        <ul>
+            <li>How to re-create application's state based on the URL?</li>
+            <li>How to change the URL in response to application's state changes?</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Ideally we would like to have "clean" URLs (HTML5 mode):</h2>
+        <ul>
+            <li><a>http://myapp.com/users/list</a></li>
+            <li><a>http://myapp.com/users/new</a></li>
+            <li><a>http://myapp.com/users/edit/[userid]</a></li>
+        </ul>
+        <p>without making round-trips to the server...</p>
+        <p>and still make URLs "bookmarkable"</p>
+    </section>
+
+    <section>
+        <h2>But we might need to stick to the "hashbang" mode</h2>
+        <ul>
+            <li><a>http://myapp.com#/users/list</a></li>
+            <li><a>http://myapp.com#/users/new</a></li>
+            <li><a>http://myapp.com#/users/edit/[userid]</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>AngularJS makes it easy to work with "client-side" URLs</h2>
+        <h3>The $location service</h3>
+        <ul>
+            <li><a href="">http://myapp.com/#/users/list?sort=name#top</a></li>
+            <li><a href="">http://myapp.com/users/list?sort=name#top</a></li>
+        </ul>
+        <hr/>
+        <table width="80%" border="1">
+            <tr>
+                <th></th>
+                <th>HTML5</th>
+                <th>Hashbang</th>
+            </tr>
+            <tr>
+                <td>$location.path()</td>
+                <td>/users/list</td>
+                <td>/users/list</td>
+            </tr>
+            <tr>
+                <td>$location.search().sort</td>
+                <td>name</td>
+                <td>name</td>
+            </tr>
+            <tr>
+                <td>$location.hash()</td>
+                <td>top</td>
+                <td>top</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>We <i>could</i> build a navigation system based on the $location + ngInclude primtives...</h2>
+    </section>
+
+    <section>
+        <h1>Routing</h1>
+        <img src="http://upload.wikimedia.org/wikipedia/commons/d/d3/Viaduct_in_Puxi,_Shanghai.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>$routeProvider</h2>
+        <pre><code ng-non-bindable=""> angular.module(&apos;app&apos;, [&apos;ngRoute&apos;, &apos;usersNgRoute&apos;])
+         .constant(&apos;MONGOLAB_CONFIG&apos;, {
+             API_KEY: &apos;4fb51e55e4b02e56a67b0b66&apos;,
+             DB_NAME: &apos;roche&apos;
+         })
+         .config(function ($routeProvider) {
+
+             $routeProvider.when(&apos;/users/list&apos;, {
+                 templateUrl: &apos;list.html&apos;
+             })
+
+             .when(&apos;/users/edit/new&apos;, {
+                 templateUrl: &apos;edit.html&apos;
+             })
+
+             .when(&apos;/users/edit/:id&apos;, {
+                 templateUrl: &apos;edit.html&apos;
+             })
+
+             .otherwise({
+                 redirectTo: &apos;/users/list&apos;
+             });
+         });</code></pre>
+    </section>
+
+    <section>
+        <h2>Route's content gets included using ngView</h2>
+        <pre><code ng-non-bindable=""><div ng-view></div></code></pre>
+    </section>
+
+    <section>
+        <h2>Advantages</h2>
+        <ul>
+            <li>Structures the whole application</li>
+            <li>Makes it easy to split HTML / JS into smaller chunks</li>
+            <li>Handles URL parsing</li>
+            <li>Handles transitions in response to $location changes</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Let's see the live example and some more code</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="40"></h2>
+        <p>Introduce routing to our demo application.</p>
+    </section>
+
+    <section>
+        <h2>It is all good, but...</h2>
+        <img src="http://i.stack.imgur.com/HxEa3.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>We need to synchronize data retrieval with view changes</h2>
+    </section>
+
+    <section>
+        <h2>Promise API to the rescue</h2>
+        <pre><code ng-non-bindable=""> $routeProvider.when(&apos;/users/list&apos;, {
+     templateUrl: &apos;/static/list.html&apos;,
+     controller: &apos;UsersListCtrl&apos;,
+     resolve: {
+         users: function(User) {
+             //if we return a promise, route change will be
+             //suspended until a promise is resolved
+             return User.getAll();
+         }
+     }
+ });</code></pre>
+    </section>
+
+    <section>
+        <h2>On top of this we can now <i>inject</i> data to a controller</h2>
+        <pre><code ng-non-bindable=""> .controller(&apos;UsersListCtrl&apos;, function ($scope, $location, User, users) {
+
+   $scope.users = users;
+   
+   $scope.edit = function (user) {
+     $location.path(&apos;/users/edit/&apos; + user.getId());
+   };</code></pre>
+        <p>making a controller easier to test</p>
+    </section>
+
+    <section>
+        <h2>Let's see the live example and some more code</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Introduce resolves into routing.</p>
+    </section>
+
+    <section>
+        <h2>$routeProvider limitations</h2>
+        <h3>There is only one "hole" to fill in (ngView)</h3>
+    </section>
+
+    <section>
+        <h2>UI-router and alternative solutions</h2>
+        <ul>
+            <li><a href="http://angular-ui.github.io/ui-router/site/" target="_blank">ui-router</a> - community driven alternative</li>
+            <li>Routing system pending re-design in AngularJS 2.0</li>
+        </ul>
+    </section>
+
+</section>
+                <section>
+    <section>
+        <h2>Internationalization</h2>
+        <img src="http://blog.lionbridge.com/translation/files/2013/07/International-Trade.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>2 main aspects of i18n</h2>
+        <ul>
+            <li>Regional settings (date, number format, currency symbols etc.)</li>
+            <li>Translations (templates, error messages etc.)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Determining / switching locale</h2>
+        <ul>
+            <li>Include a "proper" file</li>
+            <li>Declare a dependency on the ngLocale module (rather "static" method)</li>
+            <li>en-us is a default locale if none included</li>
+        </ul>
+        <pre><code ng-non-bindable="">&lt;head&gt;
+    &lt;script src=&quot;../../lib/angular.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../../lib/angular-locale_pl-pl.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;i18n.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        angular.module(&apos;app&apos;, [&apos;ngLocale&apos;, &apos;i18n&apos;]);
+    &lt;/script&gt;
+&lt;/head&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>The $locale module</h2>
+        <ul>
+            <li>$locale.id is the only public API</li>
+            <li>more interesting settings extracted from the closure library</li>
+            <li>additional settings can be used in custom directives / filters</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Built-in filters take $locale into account</h2>
+        <ul>
+            <li>date - named date formats</li>
+            <li>number - number format</li>
+            <li>currency - this one is dangerous, probably better not to use it</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Named date formats</h2>
+        <pre><code ng-non-bindable=""><div>Now: {{now | date:'fullDate'}}</div></code></pre>
+    </section>
+
+    <section>
+        <h2>Translations</h2>
+        <ul>
+            <li>Templates</li>
+            <li>JavaScript-driven content (error messages etc.)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Translating templates</h2>
+        <ul>
+            <li>Client-side</li>
+            <li>Server-side</li>
+            <li>In any case we need to have: <code>f(key, locale) => translation</code></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Handling translations client-side - filters</h2>
+        <pre><code ng-non-bindable=""><label for="name">{{ 'label.name' | i18n}}: </label></code></pre>
+        <pre><code ng-non-bindable="">
+.filter('i18n', function ($locale, TRANSLATIONS) {
+    return function (input) {
+        if (!angular.isString(input)) {
+            return input;
+         }
+         return TRANSLATIONS[$locale.id][input] || '?' + input + '?';
+    };
+});
+        </code></pre>
+        <p>An "obvious" choice.. that doesn't scale...</p>
+    </section>
+
+    <section>
+        <h2>Handling translations client-side - directives</h2>
+        <pre><code ng-non-bindable=""><label i18n="'label.name'"></label></code></pre>
+        <p>This doesn't work either:</p>
+        <ul>
+            <li>Hard to combine translated / non-translated strings</li>
+            <li>Can't be used to translate strings in attributes</li>
+        </ul>
+        <pre><code ng-non-bindable=""><input type="text" placeholder="Name"></code></pre>
+    </section>
+
+    <section>
+        <h2>angular-translate</h2>
+        <a href="http://angular-translate.github.io/" target="_blank">angular-translate</a>
+        <p>The most popular library based on the filter / directive idea</p>
+    </section>
+
+    <section>
+        <h2>Handling translations server-side</h2>
+        <h3>Basic idea:</h3>
+        <ul>
+            <li>Use build-time templates translation</li>
+            <li>Generate a set of templates for each locale</li>
+            <li>Pre-load templates bundle</li>
+        </ul>
+        <br/>
+        <p>This is a preferred method, but requires a bit of up-front build setup.</p>
+        <p>It also make it hard to switch locale on the fly</p>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="15"></h2>
+        <p>Include alternative locale (pl-pl) in the simple test page and observe its effect on various filters.</p>
+    </section>
+
+</section>
+
+                <section>
                     <h1>That's all!</h1>
                     <h3>Thank you for having me.</h3>
+                </section>
+
+                <section>
+                    <h1>Wesolych Swiat!</h1>
+                    <img src="http://www.fullhdwpp.com/wp-content/uploads/Colored-Easter-Eggs_www.FullHDWpp.com_.jpg" alt=""/>
                 </section>
 
             </div>
